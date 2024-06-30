@@ -10,7 +10,7 @@ class UserCreate(BaseModel):
     username: str
 
 
-class UserRead(User):
+class UserRead(BaseModel):
     id: int
     username: str
 
