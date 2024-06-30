@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncSession, async_sessionmaker
-from typing import AsyncGenerator, AsyncContextManager
+from typing import AsyncContextManager
 from core.config import settings
 
 
@@ -29,9 +29,8 @@ class DatabaseHelper:   # вспомогательный класс для уп�
     async def dispose(self) -> None:   # Метод для завершения соединения
         await self.engine.dispose()
 
-    async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:   # метод для получения сессии
-        async with self.async_session() as session:
-            yield session
+    def session_getter(self) -> AsyncContextManager[AsyncSession]:   # Метод для получения сессии
+        return self.async_session()
 
 
 db_helper = DatabaseHelper(
