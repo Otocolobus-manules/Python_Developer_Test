@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "python-developer-test"
+version = "0.1.0"
+description = ""
+authors = ["Чушка подзаборная <125672053+Otocolobus-manules@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sqlalchemy = "^2.0.31"
+fastapi = "^0.111.1"
+pydantic = "^2.8.2"
+uvicorn = "^0.30.3"
+asyncpg = "^0.29.0"
+alembic = "^1.13.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
