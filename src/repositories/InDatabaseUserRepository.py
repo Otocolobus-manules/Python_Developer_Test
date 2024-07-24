@@ -1,5 +1,4 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import Session
 from sqlalchemy import select, update, delete
 
 from schemas.User import CreateUser, UpdateUser, DeleteUser
@@ -13,9 +12,9 @@ class InDatabaseUserRepository(IRepository):
     Репозиторий для управления пользователями в базе данных.
 
     :param db_session: Сессия базы данных (асинхронная или синхронная)
-    :type db_session: AsyncSession | Session
+    :type db_session: AsyncSession
     """
-    def __init__(self, db_session: AsyncSession | Session) -> None:
+    def __init__(self, db_session: AsyncSession) -> None:
         """
         Инициализация репозитория
 
