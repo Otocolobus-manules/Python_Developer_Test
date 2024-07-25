@@ -1,5 +1,5 @@
 
-from Commands.ICommand import ICommand
+from commands.ICommand import ICommand
 from utils.IoC import IoC
 from schemas.User import CreateUser, UpdateUser, DeleteUser
 
@@ -49,4 +49,3 @@ class StartConsoleApp(ICommand):
 
             else:
                 print("Неверный выбор")
-
