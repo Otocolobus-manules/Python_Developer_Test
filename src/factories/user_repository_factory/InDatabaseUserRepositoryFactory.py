@@ -4,8 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class InDatabaseUserRepositoryFactory(IFactory):
-    @staticmethod
-    def create_repository(db_session: AsyncSession) -> InDatabaseUserRepository:
+    def __init__(self, db_session: AsyncSession):
+        self._db_session = db_session
+
+    def create_repository(self) -> InDatabaseUserRepository:
         """
         Создает и возвращает репозиторий для управления пользователями в базе данных.
 
@@ -14,4 +16,4 @@ class InDatabaseUserRepositoryFactory(IFactory):
         :return: Экземпляр InDatabaseUserRepository
         :rtype: InDatabaseUserRepository
         """
-        return InDatabaseUserRepository(db_session)
+        return InDatabaseUserRepository(self._db_session)

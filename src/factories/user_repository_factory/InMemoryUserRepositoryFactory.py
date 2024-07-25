@@ -3,8 +3,10 @@ from factories.user_repository_factory.IFactory import IFactory
 
 
 class InMemoryUserRepositoryFactory(IFactory):
-    @staticmethod
-    def create_repository() -> InMemoryUserRepository:
+    def __init__(self, *args):
+        ...
+
+    def create_repository(self) -> InMemoryUserRepository:
         """
         Создает и возвращает репозиторий для управления пользователями в памяти.
 

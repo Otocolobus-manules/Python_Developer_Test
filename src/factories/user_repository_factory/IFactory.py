@@ -3,7 +3,6 @@ from repositories.IRepository import IRepository
 
 
 class IFactory(ABC):
-    @staticmethod
     @abstractmethod
-    def create_repository(*args) -> IRepository:
+    def create_repository(self, *args) -> IRepository:
         raise NotImplementedError()

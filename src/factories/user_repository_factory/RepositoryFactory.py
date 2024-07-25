@@ -1,10 +1,13 @@
-from typing import Dict, Callable, Any, Union, overload, Literal, Type
+from typing import Dict, Any, Union, overload, Literal, Type
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Session
 
 from repositories.IRepository import IRepository
 from repositories.InDatabaseUserRepository import InDatabaseUserRepository
 from repositories.InMemoryUserRepository import InMemoryUserRepository
+
+from factories.user_repository_factory.InDatabaseUserRepositoryFactory import InDatabaseUserRepositoryFactory
+from factories.user_repository_factory.InMemoryUserRepositoryFactory import InMemoryUserRepositoryFactory
 
 
 class RepositoryFactory:
@@ -18,9 +21,9 @@ class RepositoryFactory:
         """
         Инициализация фабрики репозиториев.
         """
-        self._repository_types: Dict[str, Type] = {
-            'in_memory': InMemoryUserRepository,
-            'in_database': InDatabaseUserRepository
+        self._repository_types = {
+            'in_memory': InMemoryUserRepositoryFactory,
+            'in_database': InDatabaseUserRepositoryFactory
         }
 
     @overload
@@ -48,6 +51,6 @@ class RepositoryFactory:
             raise ValueError(f"Неизвестный тип репозитория: {repo_type}")
 
         try:
-            return repo_class(*args)
+            return repo_class(*args).create_repository()
         except TypeError as e:
             raise ValueError(f"Некорректные параметры для репозитория типа '{repo_type}': {e}")
