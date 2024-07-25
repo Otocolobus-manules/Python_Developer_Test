@@ -8,12 +8,7 @@ load_dotenv()
 
 
 class RepositorySettings(BaseModel):
-    url: str = (f"postgresql+asyncpg://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}"
-                f"@{os.getenv("DB_HOST")}:{os.getenv("DB_PORT")}/{os.getenv("DB_NAME")}")
-    echo: bool = False
-    echo_pool: bool = False
-    pool_size: int = 20
-    max_overflow: int = 10
+    ...
 
 
 class UserRepositoryConfig(BaseModel):
@@ -28,9 +23,14 @@ class EmailUserAutorization(BaseModel):
     port: int = int(os.getenv("EMAIL_PORT"))
 
 
+class InitProgramConfig(BaseModel):
+    program_type: str = 'console_app'
+
+
 class Settings(BaseSettings):
     user_repository_config: UserRepositoryConfig = UserRepositoryConfig()
     user_email_config: EmailUserAutorization = EmailUserAutorization()
+    init_program_config: InitProgramConfig = InitProgramConfig()
 
 
 settings = Settings()

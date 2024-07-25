@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class ICommand(ABC):
+class IRouter(ABC):
     @abstractmethod
-    def execute(self, *args):
+    def get_router(self, *args):
         raise NotImplementedError()
