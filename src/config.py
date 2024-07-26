@@ -24,7 +24,7 @@ class EmailUserAutorization(BaseModel):
 
 
 class InitProgramConfig(BaseModel):
-    program_type: str = 'console_app'
+    program_type: str = 'fastapi_app'
 
 
 class Settings(BaseSettings):
