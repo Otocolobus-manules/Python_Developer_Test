@@ -14,7 +14,7 @@ class RepositoryFactory:
     """
     Фабрика для создания репозиториев пользователей.
 
-    Этот класс позволяет создавать их экземпляры разных репозиториев с нужными параметрами.
+    Этот класс позволяет создавать экземпляры различных репозиториев с нужными параметрами.
     """
 
     def __init__(self):
@@ -28,11 +28,26 @@ class RepositoryFactory:
 
     @overload
     def create_repository(self, repo_type: Literal['in_memory']) -> InMemoryUserRepository:
+        """
+        Создает и возвращает репозиторий, работающий в памяти.
+
+        :param repo_type: Тип репозитория (должен быть 'in_memory')
+        :return: Экземпляр InMemoryUserRepository
+        :rtype: InMemoryUserRepository
+        """
         ...
 
     @overload
     def create_repository(self, repo_type: Literal['in_database'],
                           db_session: Union[AsyncSession, Session]) -> InDatabaseUserRepository:
+        """
+        Создает и возвращает репозиторий, работающий с базой данных.
+
+        :param repo_type: Тип репозитория (должен быть 'in_database')
+        :param db_session: Сессия базы данных (асинхронная или синхронная)
+        :return: Экземпляр InDatabaseUserRepository
+        :rtype: InDatabaseUserRepository
+        """
         ...
 
     def create_repository(self, repo_type: str, *args: Any) -> IRepository:

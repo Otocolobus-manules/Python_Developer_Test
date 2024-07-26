@@ -8,6 +8,11 @@ from exceptions.User.UserNotFoundException import UserNotFoundException
 
 
 async def fastapi_app(container: IoC):
+    """
+        Создает и настраивает приложение FastAPI с маршрутизаторами и обработчиками исключений.
+
+        :param container: IoC контейнер для управления зависимостями сервисов.
+        """
     app = FastAPI()
 
     user_crud_router = UserCrudRouter(container=container).get_router()

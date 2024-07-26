@@ -3,6 +3,11 @@ from schemas.User import CreateUser, UpdateUser, DeleteUser
 
 
 async def console_app(container: IoC):
+    """
+        Основная функция для консольного приложения, позволяющая выполнять CRUD операции с пользователями.
+
+        :param container: IoC контейнер, используемый для разрешения зависимостей сервисов.
+        """
     while True:
         print("Выберите действие:")
         print("1. Создать пользователя")
