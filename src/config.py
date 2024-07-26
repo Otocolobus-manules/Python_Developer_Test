@@ -8,11 +8,12 @@ load_dotenv()
 
 
 class RepositorySettings(BaseModel):
-    ...
+    url: str = (f"postgresql+asyncpg://{os.getenv("DB_USER")}:"
+                f"{os.getenv("DB_PASS")}@{os.getenv("DB_HOST")}:{os.getenv("DB_PORT")}/{os.getenv("DB_NAME")}")
 
 
 class UserRepositoryConfig(BaseModel):
-    repository_type: str = 'in_memory'
+    repository_type: str = 'in_database'
     settings: RepositorySettings = RepositorySettings()
 
 
