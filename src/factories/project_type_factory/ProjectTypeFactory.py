@@ -3,7 +3,6 @@ from typing import overload, Literal, Any
 from utils.IoC import IoC
 from factories.project_type_factory.ConsoleAppFactory import ConsoleAppFactory
 from factories.project_type_factory.FastapiAppFactory import FastApiAppFactory
-from app.console_app import console_app
 
 
 class ProjectTypeFactory:
@@ -14,7 +13,7 @@ class ProjectTypeFactory:
         }
 
     @overload
-    def create_app(self, project_type: Literal['console_app', 'fastapi_app'], container: IoC) -> console_app:
+    def create_app(self, project_type: Literal['console_app'], container: IoC):
         ...
 
     def create_app(self, project_type: str, *args: Any):
