@@ -38,13 +38,11 @@ class RepositoryFactory:
         ...
 
     @overload
-    def create_repository(self, repo_type: Literal['in_database'],
-                          db_session: Union[AsyncSession, Session]) -> InDatabaseUserRepository:
+    def create_repository(self, repo_type: Literal['in_database']) -> InDatabaseUserRepository:
         """
         Создает и возвращает репозиторий, работающий с базой данных.
 
         :param repo_type: Тип репозитория (должен быть 'in_database')
-        :param db_session: Сессия базы данных (асинхронная или синхронная)
         :return: Экземпляр InDatabaseUserRepository
         :rtype: InDatabaseUserRepository
         """

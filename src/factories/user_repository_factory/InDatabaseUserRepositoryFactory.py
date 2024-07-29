@@ -1,6 +1,8 @@
 from repositories.InDatabaseUserRepository import InDatabaseUserRepository
 from factories.user_repository_factory.IFactory import IFactory
 from sqlalchemy.ext.asyncio import AsyncSession
+from utils.DatabaseHelper import DatabaseHelper
+from config import settings
 
 
 class InDatabaseUserRepositoryFactory(IFactory):
@@ -10,14 +12,16 @@ class InDatabaseUserRepositoryFactory(IFactory):
     :param db_session: Асинхронная сессия базы данных.
     """
 
-    def __init__(self, db_session: AsyncSession):
+    def __init__(self):
         """
         Инициализирует фабрику с предоставленной сессией базы данных.
 
         :param db_session: Асинхронная сессия базы данных.
         :type db_session: AsyncSession
         """
-        self._db_session = db_session
+        self._db_session = DatabaseHelper(
+            url=settings.user_repository_config.settings.url,
+        ).session_getter()
 
     def create_repository(self) -> InDatabaseUserRepository:
         """

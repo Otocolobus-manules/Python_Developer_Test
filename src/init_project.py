@@ -14,13 +14,8 @@ from config import settings
 def init_project() -> IoC:
     container = IoC()
 
-    db_session = DatabaseHelper(
-        settings.user_repository_config.settings.url,
-    ).session_getter()
-
     repository_factory = RepositoryFactory()
-    repository = repository_factory.create_repository(settings.user_repository_config.repository_type,
-                                                      db_session)
+    repository = repository_factory.create_repository(settings.user_repository_config.repository_type)
 
     container.register('Services.CreateUserService', CreateUserService(repository=repository))
     container.register('Services.GetUserService', GetUserService(repository=repository))
