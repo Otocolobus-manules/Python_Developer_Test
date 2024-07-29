@@ -1,10 +1,7 @@
-import asyncio
-
 from utils.IoC import IoC
 from utils.DatabaseHelper import DatabaseHelper
 
 from factories.user_repository_factory.RepositoryFactory import RepositoryFactory
-from factories.project_type_factory.ProjectTypeFactory import ProjectTypeFactory
 
 from services.UserCrudServices.CreateUserService import CreateUserService
 from services.UserCrudServices.UpdateUserService import UpdateUserService
@@ -14,7 +11,7 @@ from services.UserCrudServices.GetUserService import GetUserService
 from config import settings
 
 
-async def start_project():
+def init_project() -> IoC:
     container = IoC()
 
     db_session = DatabaseHelper(
@@ -30,11 +27,5 @@ async def start_project():
     container.register('Services.UpdateUserService', UpdateUserService(repository=repository))
     container.register('Services.DeleteUserService', DeleteUserService(repository=repository))
 
-    app_factory = ProjectTypeFactory()
-    app = await app_factory.create_app(settings.init_program_config.program_type, container)
-    asyncio.run(app)
-
-
-if __name__ == "__main__":
-    asyncio.run(start_project())
+    return container
     

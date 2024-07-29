@@ -1,5 +1,8 @@
+import asyncio
+
 from utils.IoC import IoC
 from schemas.User import CreateUser, UpdateUser, DeleteUser
+from init_project import init_project
 
 
 async def console_app(container: IoC):
@@ -48,3 +51,10 @@ async def console_app(container: IoC):
 
         else:
             print("Неверный выбор")
+
+
+if __name__ == '__main__':
+    container = init_project()
+    asyncio.run(console_app(container=container))
+
+
